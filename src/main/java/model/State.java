@@ -1,6 +1,6 @@
 package model;
 
-public enum State {
+enum State {
     DEAD,
     ALIVE
 }

@@ -63,7 +63,6 @@ public class FieldGenerator {
                 }
             }
         }
-
     }
 
     private void setNeighborsToLeftTopCell(Cell cell) {

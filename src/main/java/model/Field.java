@@ -1,22 +1,36 @@
 package model;
 
 public class Field {
-    private final int M;
-    private final int N;
+    private final int m;
+    private final int n;
     private Cell[][] cells;
 
     Field(int m, int n, Cell[][] cells) {
-        M = m;
-        N = n;
+        this.m = m;
+        this.n = n;
         this.cells = cells;
+    }
+
+    public void nextStep() {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                cells[i][j].calculateNextState();
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                cells[i][j].changeState();
+            }
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder field = new StringBuilder();
 
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 field.append(String.format("%3s", cells[i][j]));
             }
             field.append(System.lineSeparator());

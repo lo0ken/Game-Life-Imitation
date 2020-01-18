@@ -1,19 +1,43 @@
 package model;
 
-public class Cell {
-    public State state;
+class Cell {
+    private State state;
+    private State nextState;
     private Cell[] neighbors;
 
-    public Cell(State state) {
+    Cell(State state) {
         this.state = state;
     }
 
-    public Cell[] getNeighbors() {
-        return neighbors;
+    void setNeighbors(Cell[] neighbors) {
+        this.neighbors = neighbors;
     }
 
-    public void setNeighbors(Cell[] neighbors) {
-        this.neighbors = neighbors;
+    void changeState() {
+        state = nextState;
+    }
+
+    public void calculateNextState() {
+        State nextState = state;
+        int aliveNeighbors = calculateAliveNeighbors();
+
+        if (aliveNeighbors < 2 || aliveNeighbors > 3) {
+            nextState =  State.DEAD;
+        }
+
+        if (aliveNeighbors == 2 || aliveNeighbors == 3) {
+            nextState =  State.ALIVE;
+        }
+
+        this.nextState = nextState;
+    }
+
+    private int calculateAliveNeighbors() {
+        int alive = 0;
+        for (Cell c : neighbors) {
+            alive += c.state.ordinal();
+        }
+        return alive;
     }
 
     @Override
