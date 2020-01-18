@@ -1,15 +1,15 @@
 package model;
 
-class Cell {
+public class Cell {
     private State state;
     private State nextState;
     private Cell[] neighbors;
 
-    Cell(State state) {
+    public Cell(State state) {
         this.state = state;
     }
 
-    void setNeighbors(Cell[] neighbors) {
+    public void setNeighbors(Cell[] neighbors) {
         this.neighbors = neighbors;
     }
 

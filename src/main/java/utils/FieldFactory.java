@@ -1,42 +1,34 @@
-package model;
+package utils;
 
-import java.util.Random;
+import generators.FieldGenerator;
+import model.Cell;
+import model.Field;
 
-public class FieldGenerator {
+public class FieldFactory {
     private final int FIRST_ROW = 0;
     private final int LAST_ROW;
     private final int FIRST_COL = 0;
     private final int LAST_COL;
     private final int m;
     private final int n;
+    private final Field field;
     private final Cell[][] cells;
 
-    public FieldGenerator(int m, int n) {
-        this.m = m;
-        this.n = n;
+    public FieldFactory(FieldGenerator generator) {
+        field = generator.generate();
+
+        this.m = field.m;
+        this.n = field.n;
 
         LAST_ROW = m - 1;
         LAST_COL = n - 1;
 
-        cells = new Cell[m][n];
+        cells = field.getCells();
     }
 
-    public Field generate() {
-        Random random = new Random();
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                int chance = random.nextInt(10);
-                if (chance == State.ALIVE.ordinal()) {
-                    cells[i][j] = new Cell(State.ALIVE);
-                } else {
-                    cells[i][j] = new Cell(State.DEAD);
-                }
-            }
-        }
+    public Field getInstance() {
         setNeighbors();
-
-        return new Field(m, n, cells);
+        return field;
     }
 
     private void setNeighbors() {

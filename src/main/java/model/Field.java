@@ -1,11 +1,11 @@
 package model;
 
 public class Field {
-    private final int m;
-    private final int n;
+    public final int m;
+    public final int n;
     private Cell[][] cells;
 
-    Field(int m, int n, Cell[][] cells) {
+    public Field(int m, int n, Cell[][] cells) {
         this.m = m;
         this.n = n;
         this.cells = cells;
@@ -23,6 +23,10 @@ public class Field {
                 cells[i][j].changeState();
             }
         }
+    }
+
+    public Cell[][] getCells() {
+        return cells;
     }
 
     @Override
