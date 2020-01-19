@@ -45,7 +45,7 @@ class CellHelper {
         this.m = cells.length;
         this.n = cells[0].length;
 
-        if (m <= 3 || n <= 3) {
+        if (m < 3 || n < 3) {
             throw new IllegalArgumentException("Size of field should be not less than 3!");
         }
 
