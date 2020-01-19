@@ -25,9 +25,6 @@ public class Field {
         }
     }
 
-    public Cell[][] getCells() {
-        return cells;
-    }
 
     @Override
     public String toString() {

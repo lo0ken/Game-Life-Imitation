@@ -22,11 +22,11 @@ public class Cell {
         int aliveNeighbors = calculateAliveNeighbors();
 
         if (aliveNeighbors < 2 || aliveNeighbors > 3) {
-            nextState =  State.DEAD;
+            nextState = State.DEAD;
         }
 
         if (aliveNeighbors == 2 || aliveNeighbors == 3) {
-            nextState =  State.ALIVE;
+            nextState = State.ALIVE;
         }
 
         this.nextState = nextState;

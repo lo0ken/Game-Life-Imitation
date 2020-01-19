@@ -1,37 +1,21 @@
-package utils;
+package generators;
 
-import generators.FieldGenerator;
 import model.Cell;
-import model.Field;
 
-public class FieldFactory {
-    private final int FIRST_ROW = 0;
-    private final int LAST_ROW;
-    private final int FIRST_COL = 0;
-    private final int LAST_COL;
-    private final int m;
-    private final int n;
-    private final Field field;
-    private final Cell[][] cells;
+class CellHelper {
+    private static final int FIRST_ROW = 0;
+    private static final int FIRST_COL = 0;
 
-    public FieldFactory(FieldGenerator generator) {
-        field = generator.generate();
+    private int LAST_ROW;
+    private int LAST_COL;
+    private int m;
+    private int n;
 
-        this.m = field.m;
-        this.n = field.n;
+    private Cell[][] cells;
 
-        LAST_ROW = m - 1;
-        LAST_COL = n - 1;
+    void setNeighbors(Cell[][] cells) {
+        calculateCellsParams(cells);
 
-        cells = field.getCells();
-    }
-
-    public Field getInstance() {
-        setNeighbors();
-        return field;
-    }
-
-    private void setNeighbors() {
         for (int row = 0; row < m; row++) {
             for (int col = 0; col < n; col++) {
                 if (row == FIRST_ROW && col == FIRST_COL) {
@@ -55,6 +39,19 @@ public class FieldFactory {
                 }
             }
         }
+    }
+
+    private void calculateCellsParams(Cell[][] cells) {
+        this.m = cells.length;
+        this.n = cells[0].length;
+
+        if (m <= 3 || n <= 3) {
+            throw new IllegalArgumentException("Size of field should be not less than 3!");
+        }
+
+        this.cells = cells;
+        LAST_ROW = m - 1;
+        LAST_COL = n - 1;
     }
 
     private void setNeighborsToLeftTopCell(Cell cell) {
@@ -210,3 +207,4 @@ public class FieldFactory {
         cell.setNeighbors(neighbors);
     }
 }
+
